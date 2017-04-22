@@ -1,5 +1,6 @@
-pragma solidity ^0.4.8;
+pragma solidity ^0.4.2;
 
+// check if the caller is the owner of the contract
 contract Ownable {
   address public owner;
 
@@ -22,20 +23,26 @@ contract Ownable {
 
 }
 
+// The main registration smart contract
 contract RegisterLicenses is Ownable {
-    
+
     function RegisterLicenses() {
-                    
+        // TBD
     }
-    
+
+    // The main structure of licenses
+    // Contains three attributes
+    // original owner , perp use lincesed to , domain ( web domain or mobile app domain )
     struct License {
         address originalContentOwner;
         address licensedTo;
         string domain; 
     }
-    
-    mapping(bytes32 => License[]) public licenses; 
-    
+
+    // Map hashOfFile => License[]
+    mapping(bytes32 => License[]) public licenses;
+
+    // Register the license for a specific hash
     function registerLicense(bytes32 contentHash, address _originalContentOwner, address _licensedTo, string _domain) {
         License memory license;
         license.originalContentOwner = _originalContentOwner;
@@ -43,7 +50,8 @@ contract RegisterLicenses is Ownable {
         license.domain = _domain;
         licenses[contentHash].push(license);
     }
-    
+
+    // Retrieve everything (every info avail) about a hash
     function retrieveLicenses(bytes32 contentHash) constant external returns (bytes32[], bytes32[], bytes32[]) {
         uint l = licenses[contentHash].length;
         bytes32[] memory outputA = new bytes32[](l);
@@ -55,23 +63,26 @@ contract RegisterLicenses is Ownable {
             outputB[i] = stringToBytes32(toString(license.licensedTo));
             outputC[i] = stringToBytes32(license.domain);
         }
-        
+
         return (outputA, outputB, outputC);
     }
-    
+
+    // Simple string converter ( utility function )
     function stringToBytes32(string memory source) returns (bytes32 result) {
         assembly {
             result := mload(add(source, 32))
         }
     }
-    
+
+    // Simple address to string ( utility function )
     function toString(address x) internal constant returns (string) {
         bytes memory b = new bytes(20);
         for (uint i = 0; i < 20; i++)
             b[i] = byte(uint8(uint(x) / (2**(8*(19 - i)))));
         return string(b);
     }
-    
+
+    // Simple str concatenate ( utility function )
     function strConcat(string _a, string _b, string _c, string _d, string _e) constant internal returns (string){
         bytes memory _ba = bytes(_a);
         bytes memory _bb = bytes(_b);
@@ -88,17 +99,20 @@ contract RegisterLicenses is Ownable {
         for (i = 0; i < _be.length; i++) babcde[k++] = _be[i];
         return string(babcde);
     }
-    
+
+    // Simple str concatenate with only four arguments ( utility function )
     function strConcat(string _a, string _b, string _c, string _d) constant internal returns (string) {
         return strConcat(_a, _b, _c, _d, "");
     }
-    
+
+    // Simple str concatenate with only three arguments ( utility function )
     function strConcat(string _a, string _b, string _c) constant internal returns (string) {
         return strConcat(_a, _b, _c, "", "");
     }
-    
+
+    // Simple str concatenate with only two arguments ( utility function )
     function strConcat(string _a, string _b) constant internal returns (string) {
         return strConcat(_a, _b, "", "", "");
     }
-    
+
 }
