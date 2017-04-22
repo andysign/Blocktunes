@@ -1,4 +1,4 @@
-pragma solidity ^0.4.10;
+pragma solidity ^0.4.2;
 
 // check if the caller is the owner of the contract
 contract Ownable {
