@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BlockTunes - Music Registration DApp</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href="./app.css" rel='stylesheet' type='text/css'>
+  <script src="./app.js"></script>
+</head>
+<body>
+
+  <h1>BlockTunes</h1>
+  <h2>Register your content here:</h2>
+  <h3>Your Ethereum address <small>( account[0] )</small> is <span class="black"><span id="main-address"></span> </span></h3>
+
+  <br>
+  <h1>registerLicense <small>(for content creators)</small></h1><br>
+  <!-- bytest32 contentHash, address _originalContentOwner, address _licensedTo, string _domain -->
+  <label for="content-hash">Hash of file <small>(md5)</small>:</label>
+  <input type="text" id="content-hash" placeholder="e.g., 6f5902ac237024bdd0c176cb93063dc4"></input>
+
+  <br>
+
+  <label for="original-content-owner">Original Content Owner Address:</label>
+  <input type="text" id="original-content-owner" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+
+  <br>
+
+  <label for="licensed-to">The Licensed Entity Address <small>( perp license )</small>:</label>
+  <input type="text" id="licensed-to" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+
+  <br>
+
+  <label for="domain">The web/mobile domain  <small>( use * for all )</small>:</label>
+  <input type="text" id="domain" placeholder="e.g., subdomain.domain.com"></input>
+
+  <br><br>
+
+  <button id="send" onclick="registerLicense()">Submit</button>
+
+  <br><br>
+
+  <button id="send" onclick="retrieveLicenses()">Retrieve</button>
+
+  <span id="status"></span>
+
+</body>
+</html>
