@@ -8,7 +8,9 @@
 <body>
   <div id="main-content">
     <div id="file-uploader">
-      <span>File: </span><input type="file" name="musicFile">
+      <span>File: </span><input type="file" name="musicFile" id="file-input">
+      <span>Domain: </span><input type="text" name="registeredDomain" id="domain-to-register">
+      <button class="btn btn-default" type="button" onclick="App.storeHashOfFile()">Register</button>
     </div>
   </div>
 </body>

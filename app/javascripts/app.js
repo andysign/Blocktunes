@@ -3,6 +3,7 @@ import "../stylesheets/app.css";
 // Import libraries we need.
 import { default as Web3} from 'web3';
 import { default as contract } from 'truffle-contract'
+import * as crypto from 'crypto';
 
 // Import our contract artifacts and turn them into usable abstractions.
 import registerLicenses_artifacts from '../../build/contracts/RegisterLicenses.json'
@@ -35,17 +36,54 @@ window.App = {
       accounts = accs;
       account = accounts[0];
 
-      calculateHashOfFile();
+      //self.registerFileSelectionEvent();
     });
   },
 
   calculateHash: function(data) {
-    return crypto.createHash('md5').update("Hello World").digest('hex');
+    return crypto.createHash('md5').update(data).digest('hex');
   },
 
-  calculateHashOfFile: function(filePath) {
-    console.log(this.calculateHash(""));
-  }
+  readFileData: function(callback) {
+    var reader = new FileReader();
+    var files = document.getElementById('file-input').files;
+    if(files == undefined || files.length === 0) {
+        return;
+    }
+    var file = files[0];
+
+    // Read in the image file as a data URL.
+    reader.onload = function(e) {
+      callback(reader.result);
+    }
+
+    reader.readAsBinaryString(file);
+  },
+
+  storeHashInSmartContract: function(ownersAddress, hash, domain) {
+    console.log("Storing the following details: ");
+    console.log(hash);
+    console.log(ownersAddress);
+    console.log(ownersAddress);
+    console.log(domain);
+    RegisterLicenses.deployed().then(function(instance) {
+        return instance.registerLicense(hash, ownersAddress, ownersAddress, domain);
+    });
+  },
+
+  storeHashOfFile: function() {
+    var self = this;
+    self.readFileData(fileData => {
+        var hash = self.calculateHash(fileData);
+        var address = account;
+        var domain = document.getElementById('domain-to-register').value;
+        self.storeHashInSmartContract(address, hash, domain);
+    });
+  },
+
+/*  registerFileSelectionEvent: function() {
+    document.getElementById('file-input').addEventListener('change', this.storeHashOfFile, false);
+  }*/
 };
 
 window.addEventListener('load', function() {
