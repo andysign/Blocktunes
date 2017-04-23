@@ -32,12 +32,11 @@ var hash = "";
 // };
 
 function setStatus(message) {
-  var status = document.getElementById("status");
-  status.innerHTML = message;
+  $("#status").html( message );
 };
 
 function getHashOfFile () {
-  var files = document.getElementById('content-upload').files;
+  var files = $("#content-upload").prop("files");
   var file = files[0];
   if (files == undefined || files.length === 0) {
       return false;
@@ -47,9 +46,8 @@ function getHashOfFile () {
 
   reader.onload = function(e) {
     hash =  md5( cb(reader.result) );
-    document.getElementById('content-upload-hash').innerHTML = hash;
-    document.getElementById('hashit').innerHTML = "";
-    document.getElementById('hashit').outerHTML = "";
+    $("#content-upload-hash").text( hash );
+    $("#hashit").remove();
   }
   reader.readAsBinaryString(file);
 
@@ -59,10 +57,10 @@ function registerLicense() {
   var r = RegisterLicenses.deployed();
 
   //
-  var contentHash = document.getElementById("content-hash").value;
-  var originalContentOwner = document.getElementById("original-content-owner").value;
-  var licensedTo = document.getElementById("licensed-to").value;
-  var domain = document.getElementById("domain").value ? document.getElementById("domain").value : "*";
+  var contentHash = $("#content-hash").val().replace(new RegExp(" ", "g"), "");
+  var originalContentOwner = $("#original-content-owner").val().replace(new RegExp(" ", "g"), "");
+  var licensedTo = $("#licensed-to").val().replace(new RegExp(" ", "g"), "");
+  var domain = $("#domain").val() ? $("#domain").val() : "*";
 
   r.registerLicense( web3.fromAscii(contentHash), originalContentOwner, licensedTo, domain, { from : web3.eth.coinbase } ).then( function (v) {
       console.log(r);
@@ -78,7 +76,7 @@ function registerLicense() {
 function retrieveLicenses() {
   var r = RegisterLicenses.deployed();
 
-  var contentHash = document.getElementById("content-hash").value;
+  var contentHash = $("#content-hash").val();
 
   r.retrieveLicenses( web3.fromAscii(contentHash) ).then( function(v) {
     console.log(v);
@@ -108,7 +106,7 @@ window.onload = function() {
     account = accounts[0];
 
     console.log( "Your main account is: " + account + " and you have " + web3.eth.getBalance( account ).toString() );
-    document.getElementById( "main-address" ).innerHTML = account;
+    $("#main-address").text( account );
 
     // refreshBalance();
   });
