@@ -107,18 +107,25 @@ window.onload = function() {
     account = accounts[0];
     smartctradd = RegisterLicenses.deployed().address;
 
-    console.log( "Your main account is: " + account + " and you have " + web3.eth.getBalance( account ).toString() );
-    $("#main-address").text( account );
-
-    console.log( "The smart contract address is: " + smartctradd );
-    $("#contract-address").text( smartctradd );
-
     var h = document.location.href;
 
     if ( h.split("#")[1] == "creators" || typeof h.split("#")[1] == "undefined" ) {
+
+      /* For creators */
       $("#panel-2").hide();
+      console.log( "Your main account is: " + account + " and you have " + web3.eth.getBalance( account ).toString() );
+      $("#main-address").text( account );
+      console.log( "The smart contract address is: " + smartctradd );
+      $("#contract-address").text( smartctradd );
+
     } else if ( h.split("#")[1] == "consumers" ) {
+
+      /* For consumers */
       $("#panel-1").hide();
+      $("#contract-address-2").text( account );
+      console.log( "The smart contract address is: " + smartctradd + " (consumers)" );
+      // 8cc5084d2e7004de036e84dd3e7601c5
+
     }
 
     // refreshBalance();
