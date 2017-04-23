@@ -32,7 +32,7 @@ var hash = "";
 // };
 
 function setStatus(message) {
-  $("#status").html( message );
+  $(".status").html( message );
 };
 
 function getHashOfFile () {
@@ -79,8 +79,28 @@ function retrieveLicenses() {
   var contentHash = $("#content-hash-search").val();
 
   r.retrieveLicenses( web3.fromAscii(contentHash) ).then( function(v) {
+
     console.log(v);
     $("#output").text(v.toString());
+    setStatus("Done");
+    owners = v[0];
+    consumers = v[1];
+    domains = v[2];
+    l = owners.length;
+    for (i=0; i<l; i++) {
+      owner = owners[i];
+      consumer = consumers[i];
+      domain = domains[i];
+      $("#contant-hash-table").find("tbody").append(
+        $("<tr>").append(
+          $("<td>").text( owner.substr(0,42) ),
+          $("<td>").text( consumer.substr(0,42) ),
+          $("<td>").text( web3.toAscii(domain) )
+        )
+      );
+    }
+
+
   } ).catch( function (e) {
     console.log(e);
     setStatus( "Error submitting - see log for details. ");
