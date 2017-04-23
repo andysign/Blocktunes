@@ -1,11 +1,6 @@
 var accounts;
 var account;
 
-function setStatus(message) {
-  var status = document.getElementById("status");
-  status.innerHTML = message;
-};
-
 // function refreshBalance() {
 //   var meta = MetaCoin.deployed();
 //
@@ -35,33 +30,10 @@ function setStatus(message) {
 //   });
 // };
 
-// readFileData: function(callback) {
-//  var reader = new FileReader();
-//  var files = document.getElementById('file-input').files;
-//  if(files == undefined || files.length === 0) {
-//      return;
-//  }
-//  var file = files[0];    // Read in the image file as a data URL.
-//  reader.onload = function(e) {    callback(reader.result);  }
-//  reader.readAsBinaryString(file);
-// }
-
-// function
-//  readFileData: function(callback) {
-//   var reader = new FileReader();
-//   var files = document.getElementById('file-input').files;
-//   if(files == undefined || files.length === 0) {
-//       return;
-//   }
-//   var file = files[0];
-//
-//   // Read in the image file as a data URL.
-//   reader.onload = function(e) {
-//     callback(reader.result);
-//   }
-//
-//   reader.readAsBinaryString(file);
-// }
+function setStatus(message) {
+  var status = document.getElementById("status");
+  status.innerHTML = message;
+};
 
 function getHashOfFile () {
   var files = document.getElementById('content-upload').files;
