@@ -81,7 +81,6 @@ function retrieveLicenses() {
   r.retrieveLicenses( web3.fromAscii(contentHash) ).then( function(v) {
 
     console.log(v);
-    $("#output").text(v.toString());
     setStatus("Done");
     owners = v[0];
     consumers = v[1];
