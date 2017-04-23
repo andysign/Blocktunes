@@ -38,7 +38,7 @@
 
     <h3> Or type in the hash manually </h3>
     <label for="content-hash">Hash of file <small>(md5)</small>:</label>
-    <input type="text" id="content-hash" placeholder="e.g., 6f5902ac237024bdd0c176cb93063dc4"></input>
+    <input type="text" id="content-hash" placeholder="e.g., 8cc5084d2e7004de036e84dd3e7601c5"></input>
 
     <br>
 
@@ -66,10 +66,6 @@
 
     <br>
 
-    <button id="send" onclick="retrieveLicenses()">Retrieve</button>
-
-    <br>
-
     <small><a href="#consumers" target="_blank">consumers</a></small>
 
   </div>
@@ -82,6 +78,17 @@
     <h2>Retrieve license information using the smart contract</h2>
     <h3>The contract address <small>( RegisterLicenses )</small> is <span class="black"><span id="contract-address-2"></span></span></h3>
 
+    <br>
+
+    <h3>Retrieve the information by typing in the hash </h3>
+    <label for="content-hash-search">Hash of file <small>(e.g: 8cc5084d2e7004de036e84dd3e7601c5)</small>:</label>
+    <input type="text" id="content-hash-search" placeholder="e.g., 8cc5084d2e7004de036e84dd3e7601c5"></input>
+
+    <br>
+
+    <button id="send" onclick="retrieveLicenses()">Retrieve</button>
+
+    <code id="output"></code>
 
     <small><a href="#creators" target="_blank">creators</a></small>
   </div>
