@@ -76,10 +76,11 @@ function registerLicense() {
 function retrieveLicenses() {
   var r = RegisterLicenses.deployed();
 
-  var contentHash = $("#content-hash").val();
+  var contentHash = $("#content-hash-search").val();
 
   r.retrieveLicenses( web3.fromAscii(contentHash) ).then( function(v) {
     console.log(v);
+    $("#output").text(v.toString());
   } ).catch( function (e) {
     console.log(e);
     setStatus( "Error submitting - see log for details. ");
