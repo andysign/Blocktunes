@@ -35,10 +35,51 @@ function setStatus(message) {
 //   });
 // };
 
+// readFileData: function(callback) {
+//  var reader = new FileReader();
+//  var files = document.getElementById('file-input').files;
+//  if(files == undefined || files.length === 0) {
+//      return;
+//  }
+//  var file = files[0];    // Read in the image file as a data URL.
+//  reader.onload = function(e) {    callback(reader.result);  }
+//  reader.readAsBinaryString(file);
+// }
+
+// function
+//  readFileData: function(callback) {
+//   var reader = new FileReader();
+//   var files = document.getElementById('file-input').files;
+//   if(files == undefined || files.length === 0) {
+//       return;
+//   }
+//   var file = files[0];
+//
+//   // Read in the image file as a data URL.
+//   reader.onload = function(e) {
+//     callback(reader.result);
+//   }
+//
+//   reader.readAsBinaryString(file);
+// }
+
+function getHashOfFile () {
+  var files = document.getElementById('content-upload').files;
+  var file = files[0];
+  if (files == undefined || files.length === 0) {
+      return;
+  }
+  var reader = new FileReader();
+  var cb = function ( d ) { return d;  }
+  var finalHash = "";
+  reader.onload = function(e) {  finalHash =  md5( cb(reader.result) );  }
+  reader.readAsBinaryString(file);
+}
+
 function registerLicense() {
   var r = RegisterLicenses.deployed();
 
-  // 
+  //
   var contentHash = document.getElementById("content-hash").value;
   var originalContentOwner = document.getElementById("original-content-owner").value;
   var licensedTo = document.getElementById("licensed-to").value;
