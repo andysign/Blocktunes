@@ -44,7 +44,7 @@ function registerLicense() {
   var licensedTo = document.getElementById("licensed-to").value;
   var domain = document.getElementById("domain").value ? document.getElementById("domain").value : "*";
 
-  r.registerLicense( "123", 0x0123567, 0x9876, "goooogle.com", { from : web3.eth.coinbase } ).then( function (v) {
+  r.registerLicense( contentHash, originalContentOwner, licensedTo, domain, { from : web3.eth.coinbase } ).then( function (v) {
       console.log(r);
       setStatus( "Transaction complete!" );
       //
