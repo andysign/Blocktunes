@@ -67,13 +67,14 @@ function getHashOfFile () {
   var files = document.getElementById('content-upload').files;
   var file = files[0];
   if (files == undefined || files.length === 0) {
-      return;
+      return false;
   }
   var reader = new FileReader();
   var cb = function ( d ) { return d;  }
-  var finalHash = "";
-  reader.onload = function(e) {  finalHash =  md5( cb(reader.result) );  }
+  var hash = "";
+  reader.onload = function(e) {  hash =  md5( cb(reader.result) );  }
   reader.readAsBinaryString(file);
+  return hash;
 }
 
 function registerLicense() {
