@@ -113,6 +113,14 @@ window.onload = function() {
     console.log( "The smart contract address is: " + smartctradd );
     $("#contract-address").text( smartctradd );
 
+    var h = document.location.href;
+
+    if ( h.split("#")[1] == "creators" || typeof h.split("#")[1] == "undefined" ) {
+      $("#panel-2").hide();
+    } else if ( h.split("#")[1] == "consumers" ) {
+      $("#panel-1").hide();
+    }
+
     // refreshBalance();
   });
 }
