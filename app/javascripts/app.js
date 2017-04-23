@@ -92,6 +92,7 @@ function retrieveLicenses() {
 
 window.onload = function() {
   web3.eth.getAccounts(function(err, accs) {
+
     if (err != null) {
       alert("There was an error fetching your accounts.");
       return;
@@ -104,9 +105,13 @@ window.onload = function() {
 
     accounts = accs;
     account = accounts[0];
+    smartctradd = RegisterLicenses.deployed().address;
 
     console.log( "Your main account is: " + account + " and you have " + web3.eth.getBalance( account ).toString() );
     $("#main-address").text( account );
+
+    console.log( "The smart contract address is: " + smartctradd );
+    $("#contract-address").text( smartctradd );
 
     // refreshBalance();
   });
