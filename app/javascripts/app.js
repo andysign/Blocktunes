@@ -38,13 +38,13 @@ function setStatus(message) {
 function registerLicense() {
   var r = RegisterLicenses.deployed();
 
-  // address _licensedTo, string _domain
+  // 
   var contentHash = document.getElementById("content-hash").value;
   var originalContentOwner = document.getElementById("original-content-owner").value;
   var licensedTo = document.getElementById("licensed-to").value;
   var domain = document.getElementById("domain").value ? document.getElementById("domain").value : "*";
 
-  r.registerLicense( contentHash, originalContentOwner, licensedTo, domain, { from : web3.eth.coinbase } ).then( function (v) {
+  r.registerLicense( web3.fromAscii(contentHash), originalContentOwner, licensedTo, domain, { from : web3.eth.coinbase } ).then( function (v) {
       console.log(r);
       setStatus( "Transaction complete!" );
       //
@@ -58,7 +58,9 @@ function registerLicense() {
 function retrieveLicenses() {
   var r = RegisterLicenses.deployed();
 
-  r.retrieveLicenses("123").then( function(v) {
+  var contentHash = document.getElementById("content-hash").value;
+
+  r.retrieveLicenses( web3.fromAscii(contentHash) ).then( function(v) {
     console.log(v);
   } ).catch( function (e) {
     console.log(e);
