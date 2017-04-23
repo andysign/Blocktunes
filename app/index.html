@@ -5,6 +5,7 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href="./app.css" rel='stylesheet' type='text/css'>
   <script src="./app.js"></script>
+  <script src="./md5.js"></script>
 </head>
 <body>
 
@@ -15,6 +16,11 @@
   <br>
   <h1>registerLicense <small>(for content creators)</small></h1><br>
   <!-- bytest32 contentHash, address _originalContentOwner, address _licensedTo, string _domain -->
+
+  <label for="content-upload">File <small>(mp3 / wav)</small>:</label>
+  <input type="file" id="content-upload" name="musicFile"></input>
+
+  <h3> Or type in the hash manually </h3>
   <label for="content-hash">Hash of file <small>(md5)</small>:</label>
   <input type="text" id="content-hash" placeholder="e.g., 6f5902ac237024bdd0c176cb93063dc4"></input>
 
