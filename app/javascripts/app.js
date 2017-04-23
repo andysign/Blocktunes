@@ -1,5 +1,6 @@
 var accounts;
 var account;
+var hash = "";
 
 // function refreshBalance() {
 //   var meta = MetaCoin.deployed();
@@ -43,10 +44,15 @@ function getHashOfFile () {
   }
   var reader = new FileReader();
   var cb = function ( d ) { return d;  }
-  var hash = "";
-  reader.onload = function(e) {  hash =  md5( cb(reader.result) );  }
+
+  reader.onload = function(e) {
+    hash =  md5( cb(reader.result) );
+    document.getElementById('content-upload-hash').innerHTML = hash;
+    document.getElementById('hashit').innerHTML = "";
+    document.getElementById('hashit').outerHTML = "";
+  }
   reader.readAsBinaryString(file);
-  return hash;
+
 }
 
 function registerLicense() {
